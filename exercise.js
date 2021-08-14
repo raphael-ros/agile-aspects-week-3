@@ -48,7 +48,7 @@ function processTransactions(transactions) {
             processPlanPayment(transaction);
           }
         } else {
-          console.log('Invalid transaction type!');
+          console.log('Invalid transaction type!', transaction);
         }
       } else if (transaction.type === 'REFUND') {
         if (transaction.status === 'OPEN') {
