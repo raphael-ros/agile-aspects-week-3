@@ -2,37 +2,17 @@ main();
 
 function main() {
   const transactions = [
-    {
-      id: 't1',
-      type: 'PAYMENT',
-      status: 'OPEN',
-      method: 'CREDIT_CARD',
-      amount: '23.99',
-    },
-    {
-      id: 't2',
-      type: 'PAYMENT',
-      status: 'OPEN',
-      method: 'PAYPAL',
-      amount: '100.43',
-    },
-    {
-      id: 't3',
-      type: 'REFUND',
-      status: 'OPEN',
-      method: 'CREDIT_CARD',
-      amount: '10.99',
-    },
-    {
-      id: 't4',
-      type: 'PAYMENT',
-      status: 'CLOSED',
-      method: 'PLAN',
-      amount: '15.99',
-    },
+    createTransaction('t1', 'PAYMENT', 'OPEN', 'CREDIT_CARD', '23.99'),
+    createTransaction('t2', 'PAYMENT', 'OPEN', 'PAYPAL', '100.43'),
+    createTransaction('t3', 'REFUND', 'OPEN', 'CREDIT_CARD', '10.99'),
+    createTransaction('t4', 'PAYMENT', 'CLOSED', 'PLAN', '15.99'),
   ];
-
+  
   processTransactions(transactions);
+}
+
+function createTransaction(id, type, status, method, amount) {
+  return {id, type, status, method, amount};
 }
 
 function processTransactions(transactions) {
@@ -72,15 +52,11 @@ function processTransactions(transactions) {
 }
 
 function processCreditCardPayment(transaction) {
-  console.log(
-    'Processing credit card payment for amount: ' + transaction.amount
-  );
+  console.log('Processing credit card payment for amount: ' + transaction.amount);
 }
 
 function processCreditCardRefund(transaction) {
-  console.log(
-    'Processing credit card refund for amount: ' + transaction.amount
-  );
+  console.log('Processing credit card refund for amount: ' + transaction.amount);
 }
 
 function processPayPalPayment(transaction) {
