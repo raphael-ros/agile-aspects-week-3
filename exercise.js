@@ -45,24 +45,15 @@ function processTransactions(transactions) {
   }
 }
 
-function processCreditCardPayment(transaction) {
-  console.log('Processing credit card payment for amount: ' + transaction.amount);
-}
+function processTransactionMensage(transaction) {
+  const methodTransaction = transaction.method.toLowerCase();
+    if(methodTransaction = "PAYPAL"){
+      methodTransaction = transaction.method.capitalize()
+    }
+  const typeTransaction = transaction.type.toLowerCase();
+  const amountTransaction = transaction.amount;
 
-function processCreditCardRefund(transaction) {
-  console.log('Processing credit card refund for amount: ' + transaction.amount);
-}
-
-function processPayPalPayment(transaction) {
-  console.log('Processing PayPal payment for amount: ' + transaction.amount);
-}
-
-function processPayPalRefund(transaction) {
-  console.log('Processing PayPal refund for amount: ' + transaction.amount);
-}
-
-function processPlanPayment(transaction) {
-  console.log('Processing plan payment for amount: ' + transaction.amount);
+  console.log(`Processing ${methodTransaction} ${typeTransaction} for amount: ${amountTransaction}`);
 }
 
 function processPlanRefund(transaction) {
