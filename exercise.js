@@ -15,39 +15,33 @@ function createTransaction(id, type, status, method, amount) {
   return {id, type, status, method, amount};
 }
 
+function isValidTransaction(transaction){
+  const validTypes = ['PAYMENT', 'REFUND'];
+  const validStatus = ['OPEN', 'CLOSED'];
+  const validMethods = ['CREDIT_CARD', 'PAYPAL', 'PLAN'];
+
+  return (
+    //includes = verifica se o valor passado está dentro de cada lista dos const valid.
+    validTypes.includes(transaction.type), 
+    validStatus.includes(transaction.status),
+    validMethods.includes(transaction.method)
+  )
+}
+
+
 function processTransactions(transactions) {
-  if (transactions && transactions.length > 0) {
-    for (const transaction of transactions) {
-      if (transaction.type === 'PAYMENT') {
-        if (transaction.status === 'OPEN') {
-          if (transaction.method === 'CREDIT_CARD') {
-            processCreditCardPayment(transaction);
-          } else if (transaction.method === 'PAYPAL') {
-            processPayPalPayment(transaction);
-          } else if (transaction.method === 'PLAN') {
-            processPlanPayment(transaction);
-          }
-        } else {
-          console.log('Invalid transaction type!', transaction);
-        }
-      } else if (transaction.type === 'REFUND') {
-        if (transaction.status === 'OPEN') {
-          if (transaction.method === 'CREDIT_CARD') {
-            processCreditCardRefund(transaction);
-          } else if (transaction.method === 'PAYPAL') {
-            processPayPalRefund(transaction);
-          } else if (transaction.method === 'PLAN') {
-            processPlanRefund(transaction);
-          }
-        } else {
-          console.log('Invalid transaction type!', transaction);
-        }
-      } else {
-        console.log('Invalid transaction type!', transaction);
-      }
+  if (!transactions || !transactions.length > 0) {
+   return console.log('No transactions provided!');
+  }
+
+  for (const transaction of transactions) {
+    if (isValidTransction(transaction)) {
+      processTransaction(transaction);
     }
-  } else {
-    console.log('No transactions provided!');
+
+    else {
+      console.log('Invalid transaction type!', transaction);
+    }
   }
 }
 
